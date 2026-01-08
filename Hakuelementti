@@ -1,0 +1,46 @@
+<script>
+(function() {
+  // Odota että DOM on valmis
+  function initSearch() {
+    // Etsi suurennuslasi-ikoni
+    var magnifierIcon = document.querySelector('.magnifier-icon');
+    
+    if (!magnifierIcon) {
+      // Jos elementtiä ei löydy heti, yritä uudelleen
+      setTimeout(initSearch, 500);
+      return;
+    }
+    
+    // Lisää CSS-tyyli sivulle
+    var style = document.createElement('style');
+    style.innerHTML = 
+      '.magnifier-icon-pulse {' +
+      '  filter: drop-shadow(0 0 8px #ffc800) brightness(0) saturate(100%) invert(77%) sepia(83%) saturate(1176%) hue-rotate(359deg) brightness(103%) contrast(101%) !important;' +
+      '  animation: iconPulse 2.5s ease-in-out infinite;' +
+      '}' +
+      '' +
+      '@keyframes iconPulse {' +
+      '  0%, 100% {' +
+      '    transform: scale(1);' +
+      '    filter: drop-shadow(0 0 6px #ffc800) brightness(0) saturate(100%) invert(77%) sepia(83%) saturate(1176%) hue-rotate(359deg) brightness(103%) contrast(101%);' +
+      '  }' +
+      '  50% {' +
+      '    transform: scale(1.1);' +
+      '    filter: drop-shadow(0 0 12px #ffc800) brightness(0) saturate(100%) invert(77%) sepia(83%) saturate(1176%) hue-rotate(359deg) brightness(103%) contrast(101%);' +
+      '  }' +
+      '}';
+    
+    document.head.appendChild(style);
+    
+    // Lisää luokka vain ikonille
+    magnifierIcon.classList.add('magnifier-icon-pulse');
+  }
+  
+  // Käynnistä kun sivu on valmis
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSearch);
+  } else {
+    initSearch();
+  }
+})();
+</script>
